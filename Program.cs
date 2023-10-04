@@ -10,39 +10,63 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Pokeyman poke1 = new GrassMon("bulbasaur", 5, 5);
-            Pokeyman poke2 = new WaterMon("squirtle", 5, 5);
-            Pokeyman poke3 = new FireMon("charmander", 5, 5);
-
             bool isPlaying = true;
+            List<Pokeyman> playerParty = new List<Pokeyman>();
+            
+
             while (isPlaying)
             {
-                Console.WriteLine("Welcome to PokeC#! Type '1' to play Game. Type '4' to exit program");
+                Console.WriteLine("Welcome to PokeC#! Type '1' to play Game, '2' to check party. Type '4' to exit program");
                 string inp = Console.ReadLine();
                 if (inp == "1")
                 {
-                    Console.WriteLine("Choose your starter: 1 for Bulbasaur, 2 for Charmander, 3 for Squirtle");
-                    inp = Console.ReadLine();
-                    switch (inp)
+                    playerParty.Add(ChoosePokemon());
+                }
+                else if (inp == "2")
+                {
+                    foreach (Pokeyman item in playerParty)
                     {
-                        case "1":
-                            Console.WriteLine("You chose 'Bulbasaur'");
-                            break;
-                        case "2":
-                            Console.WriteLine("You chose 'Charmander'");
-                            break;
-                        case "3":
-                            Console.WriteLine("You chose 'Squirtle'");
-                            break;
-                        default:
-                            break;
+                        Console.WriteLine("You have: " + item.Name + " | HP:" + item.Hp);
                     }
                 }
                 else if (inp == "4")
                 {
-                    break;
+                    isPlaying = false;
                 }
+                else
+                {
+                    Console.WriteLine("Choose a valid option");
+                }
+
             }
         }
+        private static Pokeyman ChoosePokemon()
+        {
+            Console.WriteLine("Choose your starter: '1' for Bulbasaur, '2' for Charmander, '3' for Squirtle, '4' to return.");
+            string inp = Console.ReadLine();
+           
+            switch (inp)
+            {
+                case "1":
+                    Console.WriteLine("You chose 'Bulbasaur'");
+                    return new GrassMon("Bulbasaur", 5, 5);
+                    break;
+                case "2":
+                    Console.WriteLine("You chose 'Charmander'");
+                    return new FireMon("Charmander", 5, 5);
+                    break;
+                case "3":
+                    Console.WriteLine("You chose 'Squirtle'");
+                    return new WaterMon("Squirtle", 5, 5);
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+        }
+
+    
     }
 }
+
+
