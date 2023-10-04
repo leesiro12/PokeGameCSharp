@@ -17,11 +17,11 @@ namespace ConsoleApp1
             bool isPlaying = true;
             while (isPlaying)
             {
-                Console.WriteLine("Type 'Start' to play Game. Type '4' to exit program");
+                Console.WriteLine("Welcome to PokeC#! Type '1' to play Game. Type '4' to exit program");
                 string inp = Console.ReadLine();
-                if (inp == "Start" || inp == "start")
+                if (inp == "1")
                 {
-                    Console.WriteLine("Choose your Pokemon: 1 for Bulbasaur, 2 for Charmander, 3 for Squirtle");
+                    Console.WriteLine("Choose your starter: 1 for Bulbasaur, 2 for Charmander, 3 for Squirtle");
                     inp = Console.ReadLine();
                     switch (inp)
                     {
