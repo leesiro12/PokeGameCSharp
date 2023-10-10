@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Pokeyman
+    public class Pokeyman
     {
         public string Name;
         public int Hp;
@@ -22,5 +22,11 @@ namespace ConsoleApp1
             Atk = atk;
 
         }
+
+        //attack method - pass in a target
+
+        //receive damage method -- pass a damage value
+
+
     }
 }
