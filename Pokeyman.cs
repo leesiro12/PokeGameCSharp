@@ -22,11 +22,13 @@ namespace ConsoleApp1
             Atk = atk;
 
         }
+        public void PokeyAtk(Pokeyman target)
+        {
 
-        //attack method - pass in a target
-
-        //receive damage method -- pass a damage value
-
-
+        }
+        public void PokeyHurty(int dmg)
+        {
+            Hp = Hp - dmg;
+        }
     }
 }

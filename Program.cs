@@ -18,8 +18,10 @@ namespace ConsoleApp1
     }
     public class game
     {
+        public Trainer trainerPlayer=new Trainer();
         public Trainer trainer1;
         bool isPlaying = true;
+        bool inBattle = false;
         public game()
         {
             trainer1 = new Trainer("Prime", new Pokeyman("Rattata", 10, 3));
@@ -35,16 +37,16 @@ namespace ConsoleApp1
                 string inp = Console.ReadLine();
                 if (inp == "1")
                 {
-                    trainer1.playerParty.Add(ChoosePokemon());
+                    trainerPlayer.playerParty.Add(ChoosePokemon());
                 }
                 else if (inp == "2")
                 {
-                    if (trainer1.playerParty.Count == 0)
+                    if (trainerPlayer.playerParty.Count == 0)
                     {
                         Console.WriteLine("You have no PKMN");
                     }
 
-                    foreach (Pokeyman item in trainer1.playerParty)
+                    foreach (Pokeyman item in trainerPlayer.playerParty)
                     {
                         Console.WriteLine("You have: " + item.Name + " | HP:" + item.Hp);
                         if (item is FireMon)
@@ -61,7 +63,7 @@ namespace ConsoleApp1
                         }
                     }
                 }
-                else if (inp == "3" && trainer1.playerParty.Count != 0)
+                else if (inp == "3" && trainerPlayer.playerParty.Count != 0)
                 {
                     EngageInBattle();
                 }
@@ -102,12 +104,32 @@ namespace ConsoleApp1
         }
         private Battle EngageInBattle()
         {
-            trainer1.trainerPKMN = trainer1.playerParty[0];
+            trainerPlayer.trainerPKMN = trainerPlayer.playerParty[0];
             Console.WriteLine(trainer1.trainerName + " has challenged you to a PKMN battle");
             Console.WriteLine(trainer1.trainerName + " sent out " + trainer1.trainerPKMN.Name + " | HP: " + trainer1.trainerPKMN.Hp);
-            Console.WriteLine("Go ");
+            Console.WriteLine("Go "+ trainerPlayer.playerParty[0].Name);
+            inBattle = true;
+
+            while (inBattle)
+            {
+                string inp = Console.ReadLine();
+                if (inp == "1")
+                {
+                    trainerPlayer.playerParty[0].PokeyAtk(trainer1.trainerPKMN);
+                    trainer1.trainerPKMN.PokeyHurty(trainerPlayer.playerParty[0].Atk);
+                    Console.WriteLine(trainer1.trainerPKMN.Name + " | HP: " + trainer1.trainerPKMN.Hp);
+                    if (trainer1.trainerPKMN.Hp <= 0)
+                    {
+                        break;
+                    }
+                }
+            }
+            Console.WriteLine(trainer1.trainerName + " has been defeated.");
+            inBattle = false;
+            trainer1.trainerPKMN.Hp = 10;
             return null;
         }
+        
     }
 }
 
